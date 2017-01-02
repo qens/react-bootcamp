@@ -1,6 +1,23 @@
+#root {
+  height: 100%;
+}
 .App {
+  height: 100%;
   display: flex;
   flex-flow: column nowrap;
 }
 
+main {
+  height: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  /*align-content: stretch;*/
+}
 
+.side-nav {
+  flex: 1 0 0;
+}
+
+.content {
+  flex: 2 0 0;
+}

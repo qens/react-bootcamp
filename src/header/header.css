@@ -1,5 +1,17 @@
-header {
+.header {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
+}
+
+.progress-bar {
+    background: #ccc;
+    width: 100%;
+    height: 10px;
+}
+
+.progress-line {
+    background: #e1e1b2;
+    width: 60%;
+    height: 10px;
 }

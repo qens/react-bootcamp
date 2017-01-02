@@ -7,8 +7,13 @@ export class Header extends Component {
     render() {
         return (
             <header>
-                <h2>To-Do List</h2>
-                <SearchFilter></SearchFilter>
+                <div className="header">
+                    <h2>To-Do List</h2>
+                    <SearchFilter></SearchFilter>
+                </div>
+                <div className="progress-bar">
+                    <div className="progress-line"></div>
+                </div>
             </header>
         );
     }
