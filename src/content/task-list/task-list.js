@@ -2,22 +2,16 @@ import React, { Component } from 'react';
 
 export class TaskList extends Component {
 
-    constructor(props){
-        super(props);
-        this.state = {
-            tasks: [
-                'Task 1',        
-                'Task 2',
-                'Task 3',
-            ]
-        }
-    }
+    // constructor(props){
+    //     super(props);
+    
+    // }
 
     render () {
         return (
             <ul>
-                {this.state.tasks.map(task=> (
-                    <li key={task}>{task}</li>
+                { this.props.tasks && this.props.tasks.map(task=> (
+                    <li key={task.id}>{task.name}</li>
                 ))}
             </ul>
         );

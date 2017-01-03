@@ -6,7 +6,7 @@ export class Content extends Component {
     render() {
         return (
             <div className="content"> 
-                <TaskList></TaskList>
+                <TaskList tasks={this.props.tasks}></TaskList>
             </div>
         );
     }
