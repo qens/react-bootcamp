@@ -64,7 +64,10 @@ class App extends Component {
           ]
         }
       ]
-    }
+    };
+
+    this.onChooseCategory = this.chooseCategory.bind(this);
+    this.onAddCategory = this.addCategory.bind(this);
   }
 
   chooseCategory(event, category) {
@@ -83,7 +86,7 @@ class App extends Component {
       <div className="App">
         <Header></Header>
         <main>
-          <SideNav categories={this.state.categories} chooseCategory={this.chooseCategory.bind(this)} addCategory={this.addCategory.bind(this)}></SideNav>
+          <SideNav categories={this.state.categories} chooseCategory={this.onChooseCategory} addCategory={this.onAddCategory}></SideNav>
           <Content tasks={this.state.tasks}></Content>
         </main>
       

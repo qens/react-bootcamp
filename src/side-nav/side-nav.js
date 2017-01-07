@@ -3,17 +3,24 @@ import { CategoryList } from './category-list/category-list';
 
 export class SideNav extends Component {
 
-    // constructor (props) {
-    //     super(props);
-    // }
+    constructor (props) {
+        super(props);
+
+        this.state = {
+            newCategory: ''
+        };
+
+        this.onInputChange = this.handleChange.bind(this);
+        this.onButtonClick = this.handleSubmit.bind(this);
+    }
 
     render() {
         return (
             <div className="side-nav">
-                <form onSubmit={this.handleSubmit.bind(this)}>
-                    <input onChange={this.handleChange.bind(this)} type="text" placeholder="Enter category title"/>
-                    <button>Add</button>
-                </form>
+                <div>
+                    <input onChange={this.onInputChange} type="text" placeholder="Enter category title"/>
+                    <button  onClick={this.onButtonClick}>Add</button>
+                </div>
                 <CategoryList categories={this.props.categories} chooseCategory={this.props.chooseCategory}></CategoryList>
             </div>
         );
@@ -24,7 +31,6 @@ export class SideNav extends Component {
     }
 
     handleSubmit(e) {
-        e.preventDefault();
 
         var id = this.props.categories[this.props.categories.length -1].id + 1;
         var category = {id: id, name: this.state.newCategory, tasks: []};
