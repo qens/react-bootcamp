@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Header } from './header/header';
+import {CategoryList} from './side-nav/category-list/category-list';
 import {SideNav} from './side-nav/side-nav';
 import {Content} from './content/content';
 
@@ -66,8 +67,8 @@ class App extends Component {
       ]
     };
 
-    this.onChooseCategory = this.chooseCategory.bind(this);
-    this.onAddCategory = this.addCategory.bind(this);
+    this.chooseCategory = this.chooseCategory.bind(this);
+    this.addCategory = this.addCategory.bind(this);
   }
 
   chooseCategory(event, category) {
@@ -86,8 +87,12 @@ class App extends Component {
       <div className="App">
         <Header></Header>
         <main>
-          <SideNav categories={this.state.categories} chooseCategory={this.onChooseCategory} addCategory={this.onAddCategory}></SideNav>
-          <Content tasks={this.state.tasks}></Content>
+          <SideNav>
+            <CategoryList categories={this.state.categories} chooseCategory={this.chooseCategory} addCategory={this.addCategory}></CategoryList>
+          </SideNav>
+          <Content>
+            {this.props.children || 'holla'}
+          </Content>
         </main>
       
       </div>

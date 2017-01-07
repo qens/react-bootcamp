@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 
 export class TaskList extends Component {
 
-    // constructor(props){
-    //     super(props);
-    
-    // }
+    constructor(props){
+        super(props);
+        console.log('asdf');
+    }
 
     render () {
         return (
