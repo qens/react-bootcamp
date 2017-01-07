@@ -4,6 +4,7 @@ import { Header } from './header/header';
 import {CategoryList} from './side-nav/category-list/category-list';
 import {SideNav} from './side-nav/side-nav';
 import {Content} from './content/content';
+import MainService from './service';
 
 class App extends Component {
 
@@ -11,61 +12,8 @@ class App extends Component {
     super(props);
 
     this.state = {
-      categories: [
-        {
-          id: 0,
-          name: 'Category 1',
-          tasks: [
-            {
-              id: 0,
-              name: 'Task 1'
-            }, {
-              id: 1,
-              name: 'Task 2'
-            },
-          ]
-        },{
-          id: 1,
-          name: 'Category 2',
-          tasks: [
-            {
-              id: 0,
-              name: 'Task 2 1'
-            }, {
-              id: 1,
-              name: 'Task 2 2'
-            },
-          ]
-        },{
-          id: 2,
-          name: 'Category 3',
-          tasks: [
-            {
-              id: 0,
-              name: 'Task 3 1'
-            }, {
-              id: 1,
-              name: 'Task 3 2'
-            },
-          ],
-          categories: [
-            {
-              id: 20,
-              name: 'Category 3 1',
-              tasks: [
-                {
-                  id: 0,
-                  name: 'Task 3 1 1'
-                }, {
-                  id: 1,
-                  name: 'Task 3 1 2'
-                },
-              ]
-            }
-          ]
-        }
-      ]
-    };
+      categories: MainService.getCategories()
+    }
 
     this.chooseCategory = this.chooseCategory.bind(this);
     this.addCategory = this.addCategory.bind(this);
@@ -91,7 +39,9 @@ class App extends Component {
             <CategoryList categories={this.state.categories} chooseCategory={this.chooseCategory} addCategory={this.addCategory}></CategoryList>
           </SideNav>
           <Content>
-            {this.props.children || 'holla'}
+            {this.props.children && React.cloneElement(this.props.children, {
+              tasks: this.state.tasks
+            }) || 'holla'}
           </Content>
         </main>
       
