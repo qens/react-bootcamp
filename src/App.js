@@ -20,6 +20,7 @@ class App extends Component {
   }
 
   chooseCategory(event, category) {
+    event.stopPropagation();
     console.log(category);
     this.setState({tasks: category.tasks})
   }
