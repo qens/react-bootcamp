@@ -22,13 +22,17 @@ class App extends Component {
   chooseCategory(event, category) {
     event.stopPropagation();
     console.log(category);
-    this.setState({tasks: category.tasks})
+    this.setState({tasks: category.tasks});
+    console.log(this.props);
+    this.props.router.push(`/${category.id}`);
   }
 
-  addCategory(category) {
-    this.setState(prevState => ({
-      categories: prevState.categories.concat(category)
-    }));
+  addCategory(name) {
+    MainService.addCategory(name);
+    this.setState({categories: MainService.getCategories()});
+    // this.setState(prevState => ({
+    //   categories: prevState.categories.concat(category)
+    // }));
   }
 
   render() {

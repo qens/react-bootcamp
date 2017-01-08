@@ -4,15 +4,20 @@ export class CategoryList extends Component {
 
     constructor (props) {
         super(props);
-        console.log('CategoryList')
+        this.state ={
+            newCategory: null
+        };
+
+        this.newCategoryChange = this.newCategoryChange.bind(this);
+        this.addNewCategory = this.addNewCategory.bind(this);
     }
 
     newCategoryChange (e) {
-        console.log(e.target.value);
+        this.setState({newCategory: e.target.value});
     }
 
     addNewCategory(e) {
-        console.log('add category');
+        this.props.addCategory(this.state.newCategory);
     }
 
     
