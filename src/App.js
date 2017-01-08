@@ -15,8 +15,20 @@ class App extends Component {
       categories: MainService.getCategories()
     }
 
+    this._onChanges = this._onChanges.bind(this);
     this.chooseCategory = this.chooseCategory.bind(this);
-    this.addCategory = this.addCategory.bind(this);
+  }
+
+  _onChanges() {
+    this.setState({categories: MainService.getCategories()});
+  }
+
+  componentDidMount(){
+      MainService.addChangeListener(this._onChanges);
+  }
+
+  componentWillUnmount(){
+      MainService.removeChangeListener(this._onChanges);
   }
 
   chooseCategory(event, category) {
@@ -27,21 +39,13 @@ class App extends Component {
     this.props.router.push(`/${category.id}`);
   }
 
-  addCategory(name) {
-    MainService.addCategory(name);
-    this.setState({categories: MainService.getCategories()});
-    // this.setState(prevState => ({
-    //   categories: prevState.categories.concat(category)
-    // }));
-  }
-
   render() {
     return (
       <div className="App">
         <Header></Header>
         <main>
           <SideNav>
-            <CategoryList categories={this.state.categories} chooseCategory={this.chooseCategory} addCategory={this.addCategory}></CategoryList>
+            <CategoryList categories={this.state.categories} chooseCategory={this.chooseCategory}></CategoryList>
           </SideNav>
           <Content>
             {this.props.children && React.cloneElement(this.props.children, {

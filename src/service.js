@@ -1,4 +1,5 @@
 import * as _ from 'lodash';
+import {EventEmitter} from 'events';
 
 export class Category {
     constructor(id, name, tasks, categories) {
@@ -53,6 +54,7 @@ function getCategoriesMap(categories) {
 
     
 
+const CHANGE_EVENT = 'change';
 var categories = generateCategories();
 var _categoriesMap = getCategoriesMap(categories);
 
@@ -60,9 +62,11 @@ function refresh() {
     _categoriesMap = categories;
 }
 
-class MainService {
+class MainService extends EventEmitter {
 
-    constructor() {}
+    constructor() {
+        super();
+    }
 
     getCategories() {
         return categories;
@@ -70,14 +74,29 @@ class MainService {
 
     addCategory(name) {
         categories.unshift(new Category(_.uniqueId(), name, [], null));
-        refresh();
+        this.emitChange();
     }
 
     addNestedCategory(parentCategoryId, name) {
         var category = _categoriesMap.get(parentCategoryId);
         category.categories = category.categories || [];
         category.categories.unshift(new Category(_.uniqueId(), name, [], null));
+        this.emitChange();
+    }
+
+
+
+    emitChange(){
         refresh();
+        this.emit(CHANGE_EVENT);
+    }
+
+    addChangeListener(callback){
+        this.on(CHANGE_EVENT, callback);
+    }
+
+    removeChangeListener(callback) {
+        this.removeListener(CHANGE_EVENT, callback);
     }
 
 }

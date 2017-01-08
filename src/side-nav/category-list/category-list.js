@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import MainService from '../../service';
 
 export class CategoryList extends Component {
 
@@ -17,7 +18,7 @@ export class CategoryList extends Component {
     }
 
     addNewCategory(e) {
-        this.props.addCategory(this.state.newCategory);
+        MainService.addCategory(this.state.newCategory);
     }
 
     
